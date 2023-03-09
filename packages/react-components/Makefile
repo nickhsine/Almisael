@@ -10,7 +10,11 @@ dev:
 
 build-lib:
 	@echo "$(P) Transpile es6, jsx and (typescript) to es5"
-	NODE_ENV=production yarn babel src --out-dir lib --copy-files
+	mkdir -p lib
+	BUILD_TARGET=esmodule NODE_ENV=production yarn babel src --out-dir lib/esm --copy-files
+	echo '{ "type": "module" }' > lib/esm/package.json 
+	BUILD_TARGET=commonjs NODE_ENV=production yarn babel src --out-dir lib/cjs --copy-files
+	echo '{ "type": "commonjs" }' > lib/cjs/package.json 
 
 
 build: clean build-lib

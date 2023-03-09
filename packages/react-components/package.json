@@ -1,9 +1,14 @@
 {
   "name": "@readr-media/react-component",
-  "version": "1.0.1",
+  "version": "1.0.2-beta.12",
   "description": "",
-  "main": "lib/index.js",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
   "type": "module",
+  "exports": {
+    "import": "./lib/esm/index.js",
+    "require": "./lib/cjs/index.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "make dev",
@@ -26,6 +31,7 @@
   "author": "xuanchang",
   "license": "MIT",
   "dependencies": {
+    "@readr-media/babel-plugin-styled-components": "2.0.8-alpha.3",
     "styled-components": "^5.3.5"
   },
   "peerDependencies": {

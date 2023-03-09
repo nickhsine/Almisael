@@ -1,13 +1,14 @@
 const isProduction = process.env.NODE_ENV === 'production'
+const buildTarget = process.env.BUILD_TARGET || 'esmodule' // another value could be 'commonjs'
 
-export default {
+export default  {
   presets: [
     [
       '@babel/preset-env',
       // Compile to npm packages run on Node 14+
       // We can overwrite this option at each package level
       {
-        modules: false,
+        modules: buildTarget === 'esmodule' ? false : 'commonjs',
         targets: {
           node: '14',
         },
@@ -39,8 +40,8 @@ export default {
       },
     ],
     [
-      'babel-plugin-styled-components',
-      { ssr: true, displayName: true, preprocess: false },
+      '@readr-media/babel-plugin-styled-components',
+      { ssr: true },
     ],
   ],
 }
